@@ -1,68 +1,27 @@
 import React from 'react';
 import './App.css';
-import { Line } from 'react-chartjs-2'
-import {
-  Chart as ChartJS,
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Legend,
-  Tooltip
-} from 'chart.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Graph from './pages/Graph';
+import Sidebar from './Sidebar/Sidebar.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Control from './pages/Control.jsx';
+import Tutorial from './pages/Tutorial.jsx';
+import About from './pages/About.jsx';
 
-ChartJS.register(
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Legend,
-  Tooltip
-)
-
-function App() {
-  const data = {
-    labels: ['1','2','3'],
-    datasets: [{
-      label: 'Numbers',
-      data: [10,6,9],
-      backgroundColor: 'red',
-      borderColor: 'black',
-      pointBorderColor: 'aqua',
-      fill: true,
-      tension: 0.4
-      }
-    ]
-  }
-
-  const options = {
-    plugins: {
-      legend: true
-    },
-    scales: {
-      y: {
-        // min: 3,
-        // max: 50
-      }
-    }
-  }
-
+const App = () => {
   return (
-    <div>
-      <h1>Temperature Readings</h1>
-      <div style={
-        {
-        width: '600px',
-        height: '300px',
-        padding: '20px'
-        }
-      }>
-      <Line
-        data={data}
-        options={options}
-      ></Line>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Sidebar>
+        <Routes>
+        <Route path="/" element={<Dashboard/>} />
+          <Route path ="/dashboard" element={<Dashboard/>}/>
+          <Route path ="/control" element={<Control/>}/>
+          <Route path="/graph" element={<Graph />} />
+          <Route path ="/tutorial" element={<Tutorial/>}/>
+          <Route path ="/about" element={<About/>}/>
+        </Routes>
+      </Sidebar>
+    </BrowserRouter>
   );
 }
 
