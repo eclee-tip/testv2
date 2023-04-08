@@ -27,22 +27,23 @@ ChartJS.register(
 
 const db = getDatabase(app);
 // const dataRef = db.collection('data');
-const chartRef = ref(db, 'Data/chartT/1');
-const chartRef1 = ref(db, 'Data/chartT/2');
-const chartRef2 = ref(db, 'Data/chartT/3');
-const chartRef3 = ref(db, 'Data/chartT/4');
-const chartRef4 = ref(db, 'Data/chartT/5');
-
+// const chartRef = ref(db, 'Data/chartT/1');
+// const chartRef1 = ref(db, 'Data/chartT/2');
+// const chartRef2 = ref(db, 'Data/chartT/3');
+// const chartRef3 = ref(db, 'Data/chartT/4');
+// const chartRef4 = ref(db, 'Data/chartT/5');
 
 // const db = firebase.firestore();
 // const dataRef = db.collection('Data/Temperature');
 
 const Graph = () => {
-  const [chartTemp, setChartTemp] = useState();
-  const [chartTemp1, setChartTemp1] = useState();
-  const [chartTemp2, setChartTemp2] = useState();
-  const [chartTemp3, setChartTemp3] = useState();
-  const [chartTemp4, setChartTemp4] = useState();
+
+    const databaseRef = firebase.database().ref("Data/chartT/time1");
+//   const [chartTemp, setChartTemp] = useState();
+//   const [chartTemp1, setChartTemp1] = useState();
+//   const [chartTemp2, setChartTemp2] = useState();
+//   const [chartTemp3, setChartTemp3] = useState();
+//   const [chartTemp4, setChartTemp4] = useState();
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -101,46 +102,7 @@ const Graph = () => {
         datasets: [
           {
             label: 'Day 1',
-            data: [chartTemp, chartTemp1, chartTemp2, chartTemp3, chartTemp4],
-            backgroundColor: 'blue',
-            borderColor: 'black',
-            pointBorderColor: 'black',
-            fill: true,
-            tension: 0.4,
-            borderWidth: 1,
-          },
-        ],
-      },  
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom',
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-  }, );
-
-  useEffect(() => {
-    const ctx = document.getElementById('myChart1');
-    const oldChart = ChartJS.getChart('myChart1');
-    if (oldChart) {
-      oldChart.destroy();
-    }
-    new ChartJS(ctx, {
-      type: 'line',
-      data: {
-        labels: ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23'],
-        datasets: [
-          {
-            label: 'Day 2',
-            data: [chartTemp, chartTemp1, chartTemp2, chartTemp3, chartTemp4],
+            data: [chartTemp(i)],
             backgroundColor: 'blue',
             borderColor: 'black',
             pointBorderColor: 'black',
@@ -227,21 +189,10 @@ const Graph = () => {
         {
         width: '600px',
         height: '300px',
-        padding: '20px',
-        margin: 'auto'
+        padding: '20px'
         }
       }>
       <canvas id="myChart"></canvas>
-      </div>
-      <div style={
-        {
-        width: '600px',
-        height: '300px',
-        padding: '20px',
-        margin: 'auto'
-        }
-      }>
-      <canvas id="myChart1"></canvas>
       </div>
       {/* <div style={
         {
@@ -260,8 +211,7 @@ const Graph = () => {
         {
         width: '600px',
         height: '300px',
-        padding: '20px',
-        margin: 'auto'
+        padding: '20px'
         }
       }>
       <Line

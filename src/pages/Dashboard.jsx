@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [motor, setMotor] = useState(null);
   const [blowerFan, setblowerFan] = useState(null);
   const [heatingElement, setheatingElement] = useState(null);
+  const [day, setDay] = useState(null);
   
   const db = getDatabase(app);
   const tempRef = ref(db, 'Data/Temperature'); //Temperature
@@ -83,20 +84,43 @@ const Dashboard = () => {
     });
   }, []);
 
+  const dayRef = ref(db, 'Data/day');
 
+  useEffect(() => {
+    onValue(dayRef, (snapshot) => {
+      const data = snapshot.val();
+      setDay(data);
+    });
+  }, []);
 
   return (
     <div>
+      <h1>Dashboard</h1>
+      {day >= 1 && day <= 2 ? (
+        <p className='centered'>Status: Fermentation on Process (Anaerobic Phase)</p>
+      ) : day >= 3 && day <= 4 ? (
+        <p className='centered'>Status: Fermentation on Process (Aerobic Phase)</p>
+      ) : (
+        <p className='centered'>Status: Drying on Process</p>
+      )}
       <div className="home-container">
-
         <div className="box">
-
           <div className="box-icon">
             <FaTemperatureHigh />
           </div>
           <div className="box-data">
+            <p>Day {day}</p>
             <span>Temperature</span>
             <h1>{temp} °C</h1>
+            {day === 1 ? (
+              <p>Temperature Range: 30 °C - 34 °C</p>
+            ) : day === 2 ? (
+              <p>Temperature Range: 35 °C - 39 °C</p>
+            ) : day >= 3 && day <= 4 ? (
+              <p>Temperature Range: 40 °C - 48 °C</p>
+            ) : (
+              <p>Temperature Range: 49 °C - 60 °C</p>
+            )}
           </div>
 
         </div>
@@ -107,8 +131,14 @@ const Dashboard = () => {
             <MdOutlineWaterDrop/>
           </div>
           <div className="box-data">
+            <p>Day {day}</p>
             <span>Moisture</span>
             <h1>{moisture} %</h1>
+            {day <= 4 ? (
+              <p>No required value for fermentation</p>
+            ) : (
+              <p>Needed moisture content is 7 %</p>
+            )}
           </div>
 
         </div>
@@ -118,41 +148,17 @@ const Dashboard = () => {
             <BsFillDropletFill />
           </div>
           <div className="box-data">
+            <p>Day {day}</p>
             <span>pH</span>
             <h1>{pH}</h1>
-          </div>
-
-        </div>
-        <div className="box">
-
-          <div className="box-icon">
-          <FaFan/>
-          </div>
-          <div className="box-data">
-            <span>Blower Fan</span>
-            <h1>{blowerFan}</h1>
-          </div>
-
-        </div>
-        <div className="box">
-
-          <div className="box-icon">
-            <RiSettings2Line/>
-          </div>
-          <div className="box-data">
-            <span>Motor</span>
-            <h1>{motor}</h1>
-          </div>
-
-        </div>
-        <div className="box">
-
-          <div className="box-icon">
-            <FaFan/>
-          </div>
-          <div className="box-data">
-            <span>Exhaust Fan</span>
-            <h1>{exhaustFan}</h1>
+            {day < 3 ? (
+              <p>No display of data yet</p>
+            ) : day >= 3 && day <=4 ? (
+              <p>Well Fermented Range: 4.5 - 6.5</p>
+            ) : (
+              <p>No display of data yet</p>
+            )}
+            
           </div>
 
         </div>
@@ -164,6 +170,45 @@ const Dashboard = () => {
           <div className="box-data">
             <span>PTC</span>
             <h1>{heatingElement}</h1>
+            <p class="centered">Provides heat to regulate the temperature</p>
+
+          </div>
+
+        </div>
+
+        <div className="box">
+
+          <div className="box-icon">
+          <FaFan/>
+          </div>
+          <div className="box-data">
+            <span>Blower Fan</span>
+            <h1>{blowerFan}</h1>
+            <p class="centered">Activates to spread the heat from PTC</p>
+          </div>
+
+        </div>
+      
+        <div className="box">
+
+          <div className="box-icon">
+            <FaFan/>
+          </div>
+          <div className="box-data">  
+            <span>Exhaust Fan</span>
+            <h1>{exhaustFan}</h1>
+            <p class="centered">Cools down the system when temperature is high</p>
+          </div>
+
+        </div>
+        <div className="box">
+          <div className="box-icon">
+            <RiSettings2Line/>
+          </div>
+          <div className="box-data">
+            <span>Motor</span>
+            <h1>{motor}</h1>
+            <p class="centered">Operates when it is aerobic and drying phase</p>
           </div>
 
         </div>

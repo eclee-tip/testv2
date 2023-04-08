@@ -34,8 +34,10 @@ const About = () => {
   ];
 
   return (
+    <div>
     <div className="team-section">
       <h2>Our Team</h2>
+      <br></br>
       <div className="team-members">
         {teamMembers.map((member) => (
           <div className="team-member" key={member.name}>
@@ -47,6 +49,8 @@ const About = () => {
           </div>
         ))}
       </div>
+    </div>
+    <h1>CACAOTECH is a system that can do fermentation and drying process of cacao beans. It is created to help small scale farmers in terms of production.</h1>
     </div>
   );
 }
