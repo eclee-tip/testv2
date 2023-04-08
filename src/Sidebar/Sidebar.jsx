@@ -7,7 +7,7 @@ import {AiOutlineFileText} from "react-icons/ai"
 import {FcAbout} from "react-icons/fc"
 import {FaBars} from "react-icons/fa"
 import {GiCoffeeBeans} from "react-icons/gi"
-import { BsGraphUp } from 'react-icons/bs';
+import { BsTable } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom'
 const Sidebar = ({children}) => {
     const[isOpen ,setIsOpen] = useState(false);
@@ -24,9 +24,9 @@ const Sidebar = ({children}) => {
             icon:<IoIosSettings/>
         },
         {
-            path:"/graph",
-            name:"Graph",
-            icon:<BsGraphUp/>
+            path:"/table",
+            name:"History Logs",
+            icon:<BsTable/>
         },
         {
             path:"/tutorial",

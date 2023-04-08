@@ -96,12 +96,13 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      {day >= 1 && day <= 2 ? (
-        <p className='centered'>Status: Fermentation on Process (Anaerobic Phase)</p>
+      <h2 className='tab1'>Day {day}</h2>
+      {day <= 2 ? (
+        <p className='centered1'>Status: Fermentation on Process (Anaerobic Phase)</p>
       ) : day >= 3 && day <= 4 ? (
-        <p className='centered'>Status: Fermentation on Process (Aerobic Phase)</p>
+        <p className='centered1'>Status: Fermentation on Process (Aerobic Phase)</p>
       ) : (
-        <p className='centered'>Status: Drying on Process</p>
+        <p className='centered1'>Status: Drying on Process</p>
       )}
       <div className="home-container">
         <div className="box">
@@ -109,7 +110,6 @@ const Dashboard = () => {
             <FaTemperatureHigh />
           </div>
           <div className="box-data">
-            <p>Day {day}</p>
             <span>Temperature</span>
             <h1>{temp} °C</h1>
             {day === 1 ? (
@@ -131,7 +131,6 @@ const Dashboard = () => {
             <MdOutlineWaterDrop/>
           </div>
           <div className="box-data">
-            <p>Day {day}</p>
             <span>Moisture</span>
             <h1>{moisture} %</h1>
             {day <= 4 ? (
@@ -148,7 +147,6 @@ const Dashboard = () => {
             <BsFillDropletFill />
           </div>
           <div className="box-data">
-            <p>Day {day}</p>
             <span>pH</span>
             <h1>{pH}</h1>
             {day < 3 ? (
@@ -171,9 +169,7 @@ const Dashboard = () => {
             <span>PTC</span>
             <h1>{heatingElement}</h1>
             <p class="centered">Provides heat to regulate the temperature</p>
-
           </div>
-
         </div>
 
         <div className="box">
@@ -208,7 +204,7 @@ const Dashboard = () => {
           <div className="box-data">
             <span>Motor</span>
             <h1>{motor}</h1>
-            <p class="centered">Operates when it is aerobic and drying phase</p>
+            <p class="centered">Operates when it is in aerobic and drying stage</p>
           </div>
 
         </div>
