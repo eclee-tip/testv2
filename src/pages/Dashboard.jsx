@@ -16,9 +16,10 @@ const Dashboard = () => {
   const [pH, setpH] = useState(null);
   const [exhaustFan, setexhaustFan] = useState(null);
   const [motor, setMotor] = useState(null);
-  const [blowerFan, setblowerFan] = useState(null);
+  // const [blowerFan, setblowerFan] = useState(null);
   const [heatingElement, setheatingElement] = useState(null);
   const [day, setDay] = useState(null);
+  const [ambient, setAmbient] = useState(null);
   
   const db = getDatabase(app);
   const tempRef = ref(db, 'Data/Temperature'); //Temperature
@@ -48,14 +49,23 @@ const Dashboard = () => {
     });
   }, []);
 
-  const fanRef = ref(db, 'Data/Blower_Fan'); // Exhaust Fan
+  const ambientRef = ref(db, 'Data/ambient'); // pH
 
   useEffect(() => {
-    onValue(fanRef, (snapshot) => {
+    onValue(ambientRef, (snapshot) => {
       const data = snapshot.val();
-      setblowerFan(data);
+      setAmbient(data);
     });
   }, []);
+
+  // const fanRef = ref(db, 'Data/Blower_Fan'); // Exhaust Fan
+
+  // useEffect(() => {
+  //   onValue(fanRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     setblowerFan(data);
+  //   });
+  // }, []);
 
   const motorRef = ref(db, 'Data/MOTOR'); // Motor
 
@@ -101,8 +111,10 @@ const Dashboard = () => {
         <p className='centered1'>Status: Fermentation on Process (Anaerobic Phase)</p>
       ) : day >= 3 && day <= 4 ? (
         <p className='centered1'>Status: Fermentation on Process (Aerobic Phase)</p>
-      ) : (
+      ) : day ===5 ? (
         <p className='centered1'>Status: Drying on Process</p>
+      ) : (
+        <p className='centered1'>Status: No current process</p>
       )}
       <div className="home-container">
         <div className="box">
@@ -113,16 +125,15 @@ const Dashboard = () => {
             <span>Temperature</span>
             <h1>{temp} °C</h1>
             {day === 1 ? (
-              <p>Temperature Range: 30 °C - 34 °C</p>
+              <p>Accepted Range: 30 °C - 34 °C</p>
             ) : day === 2 ? (
-              <p>Temperature Range: 35 °C - 39 °C</p>
-            ) : day >= 3 && day <= 4 ? (
-              <p>Temperature Range: 40 °C - 48 °C</p>
+              <p>Accepted Range: 35 °C - 39 °C</p>
+            ) : day === 3 || day === 4 ? (
+              <p>Accepted Range: 40 °C - 45 °C</p>
             ) : (
-              <p>Temperature Range: 49 °C - 60 °C</p>
+              <p>No required value for temperature in Drying</p>
             )}
           </div>
-
         </div>
 
         <div className="box">
@@ -135,8 +146,10 @@ const Dashboard = () => {
             <h1>{moisture} %</h1>
             {day <= 4 ? (
               <p>No required value for fermentation</p>
+            ) : day === 5 ? (
+              <p>Acceptable Range: 5.5 % - 7.5 %</p>
             ) : (
-              <p>Needed moisture content is 7 %</p>
+              <p>No required value for moisture</p>
             )}
           </div>
 
@@ -149,17 +162,33 @@ const Dashboard = () => {
           <div className="box-data">
             <span>pH</span>
             <h1>{pH}</h1>
-            {day < 3 ? (
-              <p>No display of data yet</p>
-            ) : day >= 3 && day <=4 ? (
-              <p>Well Fermented Range: 4.5 - 6.5</p>
+            {day <= 2 ? (
+              <p>No required value for fermentation (anaerobic)</p>
+            ) : day === 3 || day ===4 ? (
+              <p>Acceptable Range: 4.8 - 6.5</p>
             ) : (
-              <p>No display of data yet</p>
+              <p>No require value for pH</p>
             )}
             
           </div>
 
         </div>
+
+        <div className="box">
+          <div className="box-icon">
+            <FaTemperatureHigh />
+          </div>
+          <div className="box-data">
+            <span>Ambient Temperature</span>
+            <h1>{ambient} °C</h1>
+            {day <= 4 ? (
+              <p>Accepted Range: 30 °C - 40 °C</p>
+            ) : (
+              <p>Accepted Range: less than than 50 °C</p>
+            )}
+          </div>
+        </div>
+
         <div className="box">
 
           <div className="box-icon">
@@ -168,13 +197,14 @@ const Dashboard = () => {
           <div className="box-data">
             <span>PTC</span>
             <h1>{heatingElement}</h1>
-            <p class="centered">Provides heat to regulate the temperature</p>
+            <p class="centered">Provides heat to regulate the temperature </p>
           </div>
         </div>
 
-        <div className="box">
+        {/* <div className="box">
 
           <div className="box-icon">
+          <GiHeatHaze/>
           <FaFan/>
           </div>
           <div className="box-data">
@@ -183,7 +213,7 @@ const Dashboard = () => {
             <p class="centered">Activates to spread the heat from PTC</p>
           </div>
 
-        </div>
+        </div> */}
       
         <div className="box">
 
@@ -193,7 +223,13 @@ const Dashboard = () => {
           <div className="box-data">  
             <span>Exhaust Fan</span>
             <h1>{exhaustFan}</h1>
-            <p class="centered">Cools down the system when temperature is high</p>
+            { day >= 1 && day <= 2 ? (
+              <p class="centered">Will not turn on in this phase</p>
+            ) : day === 3 || day === 4 ? (
+              <p class="centered">Turns on when the ambient temperature is more than 40 °C</p>
+            ) : (
+              <p class="centered">Turns on when the ambient temperature is more than 49 °C</p>
+            )}
           </div>
 
         </div>
@@ -204,7 +240,12 @@ const Dashboard = () => {
           <div className="box-data">
             <span>Motor</span>
             <h1>{motor}</h1>
-            <p class="centered">Operates when it is in aerobic and drying stage</p>
+            { day === 1 || day === 2 ? (
+              <p class="centered">Will not turn on in this phase</p>
+            ) : (
+              <p class="centered">Operates the mixing process</p>
+            )}
+            
           </div>
 
         </div>

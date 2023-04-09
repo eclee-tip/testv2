@@ -33,22 +33,23 @@ const Control = () => {
   return (
     <div>
       <h1>Control for Fermentation and Drying</h1>
-    <div className="toggle-switch">
-    <h1>Fermentation</h1>
-      <button
-        className={`button ${button1On ? 'on' : 'off'}`}
-        onClick={handleButton1Click}
-      ></button>
+      <div className="toggle-switch">
+        <h1>Fermentation</h1>
+        <button
+          className={`button ${button1On ? 'on' : 'off'}`}
+          onClick={handleButton1Click}
+          disabled={button2On}
+        ></button>
       </div>
-    <div className="toggle-switch">
-    <h1>Drying</h1>
-      <button
-        className={`button ${button2On ? 'on' : 'off'}`}
-        onClick={handleButton2Click}
-      ></button>
+      <div className="toggle-switch">
+        <h1>Drying</h1>
+        <button
+          className={`button ${button2On ? 'on' : 'off'}`}
+          onClick={handleButton2Click}
+          disabled={button1On}
+        ></button>
+      </div>
     </div>
-    </div>
-    
   );
 };
 
