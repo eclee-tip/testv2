@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../style/tablev1.css';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-import { getDatabase, ref, onValue } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrsBHji8SmH4dZVRLcHInRxFEmzrKx3Wo",
@@ -29,9 +28,11 @@ const Graph = () => {
       snapshot.forEach((childSnapshot) => {
         const childData = childSnapshot.val();
         const date = new Date(childData.timestamp * 1000);
-        const hours = date.getHours();
+        let hours = date.getHours();
         const minutes = "0" + date.getMinutes();
-        const formattedDate = `${date.toLocaleDateString()} ${hours}:${minutes.substr(-2)} ${hours >= 12 ? "PM" : "AM"}`;
+        const period = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12; // convert to 12-hour format
+        const formattedDate = `${date.toLocaleDateString()} ${hours}:${minutes.substr(-2)} ${period}`;
         newData.push({
           time: formattedDate,
           temp: childData.temperature,
@@ -77,14 +78,15 @@ const Graph = () => {
   }
 
   return (
-    <div className="Graph">
+    <div>
+      <h1>History Logs</h1>
       <div style={{ textAlign: 'center', margin: '20px 0' }}>
-        <button onClick={handlePreviousDayClick}>Previous Day</button>
-        <span style={{ margin: '0 10px' }}>Day {currentDayIndex + 1}</span>
+        <button onClick={handlePreviousDayClick} style={{padding: '8px 16px'}}>&laquo; Previous Day</button>
+        <span style={{ margin: '0 10px', fontSize: 'large', fontWeight: 'bold' }}>Day {currentDayIndex + 1}</span>
         {currentDayIndex < 1 || currentDayData.length > 0 ? (
-          <button onClick={handleNextDayClick}>Next Day</button>
+          <button onClick={handleNextDayClick} style={{padding: '8px 16px'}}>Next Day &raquo;</button>
         ) : null}
-        <button onClick={handleDownloadCSV}>Download CSV</button>
+        
       </div>
 
       <div style={{ overflowX: 'auto' }}>
@@ -92,8 +94,8 @@ const Graph = () => {
           <thead style={{ position: 'sticky', top: 0 }}>
             <tr>
               <th style={{ width: '30%' }}>Time</th>
-              <th style={{ width: '35%' }}>Temperature</th>
-              <th style={{ width: '35%' }}>Moisture</th>
+              <th style={{ width: '35%' }}>Temperature (°C)</th>
+              <th style={{ width: '35%' }}>Moisture (%)</th>
             </tr>
           </thead>
           <tbody>
@@ -101,13 +103,16 @@ const Graph = () => {
               return (
                 <tr key={key}>
                   <td>{val.time}</td>
-                  <td>{val.temp}</td>
-                  <td>{val.moisture}</td>
+                  <td>{val.temp} °C</td>
+                  <td>{val.moisture} %</td>
                 </tr>
               )
             })}
           </tbody>
         </table>
+        <div style={{ textAlign: 'center', margin: '20px 0' }}>
+        <button onClick={handleDownloadCSV} style={{padding: '8px 16px'}}>Download CSV</button>
+        </div>
       </div>
     </div>
   );

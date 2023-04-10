@@ -122,7 +122,7 @@ const Dashboard = () => {
             <FaTemperatureHigh />
           </div>
           <div className="box-data">
-            <span>Temperature</span>
+            <span>Temperature (Cacao)</span>
             <h1>{temp} °C</h1>
             {day === 1 ? (
               <p>Accepted Range: 30 °C - 34 °C</p>
@@ -134,44 +134,6 @@ const Dashboard = () => {
               <p>No required value for temperature in Drying</p>
             )}
           </div>
-        </div>
-
-        <div className="box">
-
-          <div className="box-icon">
-            <MdOutlineWaterDrop/>
-          </div>
-          <div className="box-data">
-            <span>Moisture</span>
-            <h1>{moisture} %</h1>
-            {day <= 4 ? (
-              <p>No required value for fermentation</p>
-            ) : day === 5 ? (
-              <p>Acceptable Range: 5.5 % - 7.5 %</p>
-            ) : (
-              <p>No required value for moisture</p>
-            )}
-          </div>
-
-        </div>
-        <div className="box">
-
-          <div className="box-icon">
-            <BsFillDropletFill />
-          </div>
-          <div className="box-data">
-            <span>pH</span>
-            <h1>{pH}</h1>
-            {day <= 2 ? (
-              <p>No required value for fermentation (anaerobic)</p>
-            ) : day === 3 || day ===4 ? (
-              <p>Acceptable Range: 4.8 - 6.5</p>
-            ) : (
-              <p>No require value for pH</p>
-            )}
-            
-          </div>
-
         </div>
 
         <div className="box">
@@ -199,6 +161,44 @@ const Dashboard = () => {
             <h1>{heatingElement}</h1>
             <p class="centered">Provides heat to regulate the temperature </p>
           </div>
+        </div>
+
+        <div className="box">
+
+          <div className="box-icon">
+            <MdOutlineWaterDrop/>
+          </div>
+          <div className="box-data">
+            <span>Moisture</span>
+            <h1>{moisture} %</h1>
+            {day <= 4 ? (
+              <p>No required value for fermentation</p>
+            ) : day === 5 ? (
+              <p>Acceptable Range: 5.5 % - 7.5 %</p>
+            ) : (
+              <p>No required value for moisture</p>
+            )}
+          </div>
+
+        </div>
+        <div className="box">
+
+          <div className="box-icon">
+            <BsFillDropletFill />
+          </div>
+          <div className="box-data">
+            <span>pH (Cotyledon)</span>
+            <h1>{pH}</h1>
+            {day <= 2 ? (
+              <p>No required value for fermentation (anaerobic)</p>
+            ) : day === 3 || day ===4 ? (
+              <p>Acceptable Range: 4.8 - 6.5</p>
+            ) : (
+              <p>No require value for pH</p>
+            )}
+            
+          </div>
+
         </div>
 
         {/* <div className="box">
