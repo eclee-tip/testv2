@@ -556,12 +556,9 @@ const Dashboard = () => {
             ) : (
               <span1 class="centered" style={{margin: '10px'}}>The motor will operate twice per day for mixing process</span1>
             )}
-            
           </div>
-
         </div>
         )}
-        
         
       </div>
     </div>
