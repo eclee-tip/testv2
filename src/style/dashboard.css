@@ -10,12 +10,18 @@
     margin: 1rem;
 }
 
+.box-hide {
+    height: 15rem;
+    width: 20rem;
+    margin: 1rem;
+    opacity: 50%;
+}
+
 .box-icon {
     position: absolute;
-    height: 6rem;
-    width: 6rem;
+    height: 5rem;
+    width: 5rem;
     margin-top: 1rem;
-    margin-left: 1rem;
     border-radius: 50%;
 }
 .box:hover > .box-icon {
@@ -32,7 +38,7 @@
 .box-data {
     flex-direction: column;
     height: 12rem;
-    width: 20rem;
+    width: 21rem;
     margin-top: 5rem;
     background-color: #fff;
     border-radius: 10px;
@@ -41,6 +47,16 @@
 .box-data > span {
     color: #2c6587;
     font-size: 2rem;
+    font-family: Candara;
+}
+
+span1 {
+    display: block;
+    font-family: Candara;
+}
+
+.font-candara {
+    font-family: Candara;
 }
 
 .box-data > h1 {
@@ -49,7 +65,7 @@
 }
 
 .box-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #fff;
 }
 
@@ -57,24 +73,47 @@
     background-color:  #f15656;
 }
 
+.box-hide:nth-child(1)> .box-icon {
+    background-color:  #f15656;
+}
+
 .box:nth-child(2)> .box-icon {
-    background-color:  #5a84f7;
+    background-color:  #ec8704d2;
 }
 
 .box:nth-child(3)> .box-icon {
-    background-color:  #1daf19;
+    background-color:  #51a2eed2;
 }
 
 .box:nth-child(4)> .box-icon {
-    background-color:  #ec8704d2;
+    background-color:  #5a84f7;
 }
+
+.box-hide:nth-child(4)> .box-icon {
+    background-color:  #5a84f7;
+}
+
 .box:nth-child(5)> .box-icon {
-    background-color:  #51a2eed2;
+    background-color:  #1daf19;
 }
+
+.box-hide:nth-child(5)> .box-icon {
+    background-color:  #1daf19;
+}
+
 .box:nth-child(6)> .box-icon {
     background-color:  #3c63eed2;
 }
+
+.box-hide:nth-child(6)> .box-icon {
+    background-color:  #3c63eed2;
+}
+
 .box:nth-child(7)> .box-icon {
+    background-color:  #f44343d2;
+}
+
+.box-hide:nth-child(7)> .box-icon {
     background-color:  #f44343d2;
 }
 
@@ -108,7 +147,110 @@
     text-align: center;
 }
 
+.inline-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+.inline-block {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+  }
+
+.boxline-data {
+    flex-direction: column;
+    
+    width: 21rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.danger {
+    color: red;
+    display: inline;
+    font-size: 24px; /* increase the font-size to make the icon bigger */
+  }
+
+/* *********************************************************************** */
+
+.danger-rectangle {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 24px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    box-sizing: border-box;
+    margin-top: 10px;
+  }
+
+.danger-box {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+}
+
+.warning-rectangle {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 24px;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    box-sizing: border-box;
+    margin-top: 10px;
+  }
+
+.warning-box {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    background-color: orange;
+}
+
+.accepted-rectangle {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 24px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    box-sizing: border-box;
+    margin-top: 10px;
+  }
+
+.accepted-box {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    background-color: green;
+}
+
+/* *********************************************************************** */
+
 /* media queries (medium device) */
+
+@font-face {
+    font-family: "Candara";
+    src: url("../fonts/CANDARA.ttf") format("truetype");
+  }
 
 @media screen and (max-width : 1024px ) {
     .home-container-2 {
@@ -125,6 +267,10 @@
   
   @media screen and (max-width : 600px ) {
     .box {
+        width: 12rem;
+    }
+
+    .box-hide {
         width: 12rem;
     }
   }

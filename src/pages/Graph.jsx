@@ -79,12 +79,12 @@ const Graph = () => {
 
   return (
     <div>
-      <h1>History Logs</h1>
+      <h1 className='font-candara'>History Logs</h1>
       <div style={{ textAlign: 'center', margin: '20px 0' }}>
-        <button onClick={handlePreviousDayClick} style={{padding: '8px 16px'}}>&laquo; Previous Day</button>
-        <span style={{ margin: '0 10px', fontSize: 'large', fontWeight: 'bold' }}>Day {currentDayIndex + 1}</span>
+        <button onClick={handlePreviousDayClick} style={{padding: '8px 16px'}} className='font-candara'>&laquo; Previous Day</button>
+        <span style={{ margin: '0 10px', fontSize: 'large', fontWeight: 'bold' }} className='font-candara'>Day {currentDayIndex + 1}</span>
         {currentDayIndex < 1 || currentDayData.length > 0 ? (
-          <button onClick={handleNextDayClick} style={{padding: '8px 16px'}}>Next Day &raquo;</button>
+          <button onClick={handleNextDayClick} style={{padding: '8px 16px'}} className='font-candara'>Next Day &raquo;</button>
         ) : null}
         
       </div>
@@ -111,7 +111,7 @@ const Graph = () => {
           </tbody>
         </table>
         <div style={{ textAlign: 'center', margin: '20px 0' }}>
-        <button onClick={handleDownloadCSV} style={{padding: '8px 16px'}}>Download CSV</button>
+        <button onClick={handleDownloadCSV} style={{padding: '8px 16px'}} className='font-candara'>Download CSV</button>
         </div>
       </div>
     </div>

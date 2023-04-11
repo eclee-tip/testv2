@@ -32,9 +32,9 @@ const Control = () => {
 
   return (
     <div>
-      <h1>Control for Fermentation and Drying</h1>
+      <h1 className='font-candara'>Control for Fermentation and Drying</h1>
       <div className="toggle-switch">
-        <h1>Fermentation</h1>
+        <h1 className='font-candara'>Fermentation</h1>
         <button
           className={`button ${button1On ? 'on' : 'off'}`}
           onClick={handleButton1Click}
@@ -42,7 +42,7 @@ const Control = () => {
         ></button>
       </div>
       <div className="toggle-switch">
-        <h1>Drying</h1>
+        <h1 className='font-candara'>Drying</h1>
         <button
           className={`button ${button2On ? 'on' : 'off'}`}
           onClick={handleButton2Click}

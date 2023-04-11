@@ -36,7 +36,7 @@ const About = () => {
   return (
     <div>
     <div className="team-section">
-      <h2>Our Team</h2>
+      <h2 className='font-candara'>Our Team</h2>
       <br></br>
       <div className="team-members">
         {teamMembers.map((member) => (
@@ -50,7 +50,7 @@ const About = () => {
         ))}
       </div>
     </div>
-    <h1>CACAOTECH is a system that can do fermentation and drying process of cacao beans. It is created to help small scale farmers in terms of production.</h1>
+    <h1 className='font-candara'>CACAOTECH is a system that can do fermentation and drying process of cacao beans. It is created to help small scale farmers in terms of production.</h1>
     </div>
   );
 }
