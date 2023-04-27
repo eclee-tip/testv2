@@ -4,13 +4,13 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCrsBHji8SmH4dZVRLcHInRxFEmzrKx3Wo",
-  authDomain: "cacao-test.firebaseapp.com",
-  databaseURL: "https://cacao-test-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "cacao-test",
-  storageBucket: "cacao-test.appspot.com",
-  messagingSenderId: "423532869885",
-  appId: "1:423532869885:web:2a103afd6f51672af1e694"
+  apiKey: "AIzaSyDy6QLCpFteT6R8uy_AQaqbrBLhUXl9kkw",
+  authDomain: "cacao-pamcak-84bec.firebaseapp.com",
+  databaseURL: "https://cacao-pamcak-84bec-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "cacao-pamcak-84bec",
+  storageBucket: "cacao-pamcak-84bec.appspot.com",
+  messagingSenderId: "145929256674",
+  appId: "1:145929256674:web:c3c76c07ef0b6ffa09e8bb"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -36,6 +36,7 @@ const Graph = () => {
         newData.push({
           time: formattedDate,
           temp: childData.temperature,
+          ambient: childData.ambient,
           moisture: childData.moisture
         });
       });
@@ -64,9 +65,9 @@ const Graph = () => {
   }
 
   const handleDownloadCSV = () => {
-    const csvData = [["Time", "Temperature", "Moisture"]]; // header row
+    const csvData = [["Time", "Temperature", "Ambient", "Moisture"]]; // header row
     currentDayData.forEach((val) => {
-      csvData.push([val.time, val.temp, val.moisture]); // data rows
+      csvData.push([val.time, val.temp, val.ambient, val.moisture]); // data rows
     });
     const csvContent = "data:text/csv;charset=utf-8," + csvData.map(row => row.join(",")).join("\n");
     const encodedURI = encodeURI(csvContent);
@@ -93,8 +94,9 @@ const Graph = () => {
         <table style={{ margin: '0 auto', width: '100%', tableLayout: 'fixed' }}>
           <thead style={{ position: 'sticky', top: 0 }}>
             <tr>
-              <th style={{ width: '30%' }}>Time</th>
-              <th style={{ width: '35%' }}>Temperature (°C)</th>
+              <th style={{ width: '30%' }}>Date & Time</th>
+              <th style={{ width: '35%' }}>Cacao Temperature (°C)</th>
+              <th style={{ width: '35%' }}>Ambient Temperature (°C)</th>
               <th style={{ width: '35%' }}>Moisture (%)</th>
             </tr>
           </thead>
@@ -104,6 +106,7 @@ const Graph = () => {
                 <tr key={key}>
                   <td>{val.time}</td>
                   <td>{val.temp} °C</td>
+                  <td>{val.ambient} °C</td>
                   <td>{val.moisture} %</td>
                 </tr>
               )

@@ -108,13 +108,13 @@ const Dashboard = () => {
 
   const getAcceptedRange = () => {
     if (day === 1) {
-      return <span1>Accepted Range: 30 °C - 34 °C</span1>; 
+      return <span1>Accepted Range: 30 °C - 35 °C</span1>; 
     } else if (day === 2) {
-      return <span1>Accepted Range: 35 °C - 39 °C</span1>;
+      return <span1>Accepted Range: 30 °C - 35 °C</span1>;
     } else if (day === 3) {
-      return <span1>Accepted Range: 40 °C - 44 °C</span1>
+      return <span1>Accepted Range: 40 °C - 45 °C</span1>
     } else if (day === 4) {
-      return <span1>Accepted Range: 45 °C - 50 °C</span1>;
+      return <span1>Accepted Range: 45 °C - 49 °C</span1>;
     } else {
       return <span1>No required value for temperature in Drying</span1>;
     }
@@ -141,7 +141,7 @@ const Dashboard = () => {
     <div>
       <div className='inline-container'>
         <h1 className='font-candara inline-block'>Dashboard</h1>
-        <p className='font-candara inline-block '>Legend: <span className='danger-box'></span> = far from range <span className='warning-box'></span> = close to range <span className='accepted-box'></span> = within range</p>
+        <p className='font-candara inline-block'>Legend: <br></br><span className='danger-box'></span> = far from acceptable range <br></br><span className='warning-box'></span> = close to acceptable range <br></br><span className='accepted-box'></span> = within acceptable range</p>
       </div>
 
       <div>
@@ -169,58 +169,70 @@ const Dashboard = () => {
             <span>Temperature (Cacao)</span>
             <h1>{temp} °C</h1>
             {getAcceptedRange()}
-            {(day === 1 && (temp < 28.5 || temp > 35.7)) ? (
+            {(day === 1 && (temp < 28.5 || temp > 36.75)) ? (
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
-            ) : (day === 1 && ((temp >= 28.5 && temp < 30) || (temp <= 35.7 && temp > 34))) ? (
+            ) : (day === 1 && ((temp >= 28.5 && temp < 30) || (temp <= 36.75 && temp > 35))) ? (
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
-            ): (day === 1 && (temp >= 30 || temp <= 34)) ? (
+            ): (day === 1 && (temp >= 30 || temp <= 35)) ? (
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
-            ) : (day === 2 && (temp < 33.25 || temp > 40.95)) ? (
+            ) : (day === 2 && (temp < 28.5 || temp > 36.75)) ? (
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
-            ) : (day === 2 && ((temp >= 33.25 && temp < 35) || (temp > 39 && temp <= 40.95))) ? (
+            ) : (day === 2 && ((temp >= 28.5 && temp < 30) || (temp <= 36.75 && temp > 35))) ? (
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
-            ) : (day === 2 && (temp >= 35 || temp <= 39)) ? (
+            ) : (day === 2 && (temp >= 30 || temp <= 35)) ? (
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
-            ) : (day === 3 && (temp < 38 || temp > 46.2)) ? (
+            // ) : (day === 2 && (temp < 34.2 || temp > 40.95)) ? (
+            //   <div class="danger-rectangle">
+            //   <p>DANGER</p>
+            //   </div>
+            // ) : (day === 2 && ((temp >= 34.2 && temp < 36) || (temp > 39 && temp <= 40.95))) ? (
+            //   <div class="warning-rectangle">
+            //   <p>WARNING</p>
+            //   </div>
+            // ) : (day === 2 && (temp >= 36 || temp <= 39)) ? (
+            //   <div class="accepted-rectangle">
+            //   <p>ACCEPTED</p>
+            //   </div>
+            ) : (day === 3 && (temp < 38 || temp > 47.25)) ? (
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
-            ) : (day === 3 && ((temp >= 38 && temp < 40) || (temp > 44 && temp <= 46.2))) ? (
+            ) : (day === 3 && ((temp >= 38 && temp < 40) || (temp > 45 && temp <= 47.25))) ? (
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
-            ) : (day === 3 && (temp >= 40 || temp <= 44)) ?(
+            ) : (day === 3 && (temp >= 40 || temp <= 45)) ?(
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
-            ) : (day === 4 && (temp < 42.75 || temp > 52.5)) ? (
+            ) : (day === 4 && (temp < 42.75 || temp > 51.45)) ? (
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
-            ) : (day === 4 && ((temp >= 42.75 && temp < 45) || (temp > 50 && temp <= 52.5))) ? (
+            ) : (day === 4 && ((temp >= 42.75 && temp < 45) || (temp > 49 && temp <= 51.45))) ? (
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
-            ) : (day === 4 && (temp >= 45 || temp <= 50)) ?(
+            ) : (day === 4 && (temp >= 45 || temp <= 49)) ?(
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
             ) : null}
           </div>
         </div>
-        ): (
+        ) : (
           <div className="box-hide">
           <div className="box-icon">
             <FaTemperatureHigh />
@@ -250,86 +262,86 @@ const Dashboard = () => {
           <div className="box-data">
             <span>Ambient Temperature</span>
             <h1>{ambient} °C</h1>
-            {((day === 1 || day === 2) && (ambient < 28.5 || ambient > 35.7)) ? (
+            {((day === 1 || day === 2) && (ambient < 28.5 || ambient > 36.75)) ? (
               <>
-              <span1>Accepted Range: 30 °C - 34 °C</span1>
+              <span1>Accepted Range: 30 °C - 35 °C</span1>
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
               </>
-            ) : ((day === 1 || day === 2) && ((ambient >= 28.5 && ambient < 30) || (ambient > 34 && ambient <= 35.7))) ? (
+            ) : ((day === 1 || day === 2) && ((ambient >= 28.5 && ambient < 30) || (ambient > 35 && ambient <= 36.75))) ? (
               <>
-              <span1>Accepted Range: 30 °C - 34 °C</span1>
+              <span1>Accepted Range: 30 °C - 35 °C</span1>
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
               </>
-            ) : ((day === 1 || day === 2) && (ambient >= 30 || ambient <= 34)) ? (
+            ) : ((day === 1 || day === 2) && (ambient >= 30 || ambient <= 35)) ? (
               <>
-              <span1>Accepted Range: 30 °C - 34 °C</span1>
+              <span1>Accepted Range: 30 °C - 35 °C</span1>
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
               </>
-            ) : (day === 3 && (ambient < 33.25 || ambient > 42)) ? (
+            ) : (day === 3 && (ambient < 38 || ambient > 47.25)) ? (
               <>
-              <span1>Accepted Range: 35 °C - 40 °C</span1>
+              <span1>Accepted Range: 40 °C - 45 °C</span1>
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
               </>
-            ) : (day === 3 && ((ambient >= 33.25 && ambient < 35) || (ambient > 40 && ambient <= 42))) ? (
+            ) : (day === 3 && ((ambient >= 38 && ambient < 40) || (ambient > 45 && ambient <= 47.25))) ? (
               <>
-              <span1>Accepted Range: 35 °C - 40 °C</span1>
+              <span1>Accepted Range: 40 °C - 45 °C</span1>
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
               </>
-            ) : (day === 3 && (ambient >= 35 || ambient <= 40)) ? (
+            ) : (day === 3 && (ambient >= 40 || ambient <= 45)) ? (
               <>
-              <span1>Accepted Range: 35 °C - 40 °C</span1>
+              <span1>Accepted Range: 40 °C - 45 °C</span1>
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
               </>
-            ) : (day === 4 && (ambient < 33.25 || ambient > 38.85)) ? (
+            ) : (day === 4 && (ambient < 42.75 || ambient > 51.45)) ? (
               <>
-              <span1>Accepted Range: 35 °C - 37 °C</span1>
+              <span1>Accepted Range: 45 °C - 49 °C</span1>
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
               </>
-            ) : (day === 4 && ((ambient >= 33.25 && ambient < 35) || (ambient > 37 && ambient <= 38.85))) ? (
+            ) : (day === 4 && ((ambient >= 42.75 && ambient < 45) || (ambient > 49 && ambient <= 51.45))) ? (
               <>
-              <span1>Accepted Range: 35 °C - 37 °C</span1>
+              <span1>Accepted Range: 45 °C - 49 °C</span1>
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
               </>
-            ) : (day === 4 && (ambient >= 35 || ambient <= 37)) ? (
+            ) : (day === 4 && (ambient >= 45 || ambient <= 49)) ? (
               <>
-              <span1>Accepted Range: 35 °C - 37 °C</span1>
+              <span1>Accepted Range: 45 °C - 49 °C</span1>
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
               </>
-            ) : (ambient > 52.5) ? (
+            ) : (ambient < 42.75 || ambient > 51.45) ? (
               <>
-              <span1>Accepted Range: less than than 50 °C</span1>
+              <span1>Accepted Range: 45 °C - 49 °C</span1>
               <div class="danger-rectangle">
               <p>DANGER</p>
               </div>
               </>
-            ) : (ambient > 50 && ambient <= 52.5) ? (
+            ) : ((ambient >= 42.75 && ambient < 45) || (ambient > 49 && ambient <= 51.45)) ? (
               <>
-              <span1>Accepted Range: less than than 50 °C</span1>
+              <span1>Accepted Range: 45 °C - 49 °C</span1>
               <div class="warning-rectangle">
               <p>WARNING</p>
               </div>
               </>
-            ) : (ambient <= 50) ? (
+            ) : (ambient >= 45 || ambient <= 49) ? (
               <>
-              <span1>Accepted Range: less than than 50 °C</span1>
+              <span1>Accepted Range: 45 °C - 49 °C</span1>
               <div class="accepted-rectangle">
               <p>ACCEPTED</p>
               </div>
@@ -495,11 +507,11 @@ const Dashboard = () => {
             <h1>{exhaustFan}</h1>
             { day >= 1 && day <= 2 ? (
               <span1 class="centered">Will not turn on in this phase</span1>
-            ) : day === 3 || day === 4 ? (
-              <span1 class="centered">Turns on when ambient temperature is more than 40 °C</span1>
-            ) : (
+            ) : day === 3 ? (
+              <span1 class="centered">Turns on when ambient temperature is more than 45 °C</span1>
+            ) : day >= 4 ? (
               <span1 class="centered">Turns on when ambient temperature is more than 49 °C</span1>
-            )}
+            ) : null}
           </div>
 
         </div>
@@ -514,11 +526,11 @@ const Dashboard = () => {
             <h1>{exhaustFan}</h1>
             { day >= 1 && day <= 2 ? (
               <span1 class="centered">Will not turn on in this phase</span1>
-            ) : day === 3 || day === 4 ? (
-              <span1 class="centered" style={{margin: '10px'}}>Turns on when ambient temperature is more than 40 °C</span1>
-            ) : (
+            ) : day === 3 ? (
+              <span1 class="centered" style={{margin: '10px'}}>Turns on when ambient temperature is more than 45 °C</span1>
+            ) : day >= 4 ? (
               <span1 class="centered" style={{margin: '10px'}}>Turns on when ambient temperature is more than 49 °C</span1>
-            )}
+            ) : null}
           </div>
 
         </div>
@@ -552,9 +564,9 @@ const Dashboard = () => {
             { day === 1 || day === 2 ? (
               <span1 class="centered">Will not turn on in this phase</span1>
             ) : day === 3 || day === 4 ? (
-              <span1 class="centered" style={{margin: '10px'}}>The motor will operate once per day for mixing process</span1>
-            ) : (
               <span1 class="centered" style={{margin: '10px'}}>The motor will operate twice per day for mixing process</span1>
+            ) : (
+              <span1 class="centered" style={{margin: '10px'}}>The motor will operate four times per day for mixing process</span1>
             )}
           </div>
         </div>
